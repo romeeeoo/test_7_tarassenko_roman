@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %} All Records {% endblock %}
+
+{% block content %}
+    {% for record in records %}
+        <div>
+            <div class="row">
+                <h2>{{ record.author }}</h2>
+            </div>
+            <div class="row">
+                <p>{{ record.email }}</p>
+            </div>
+            <div class="row">
+                    <p>{{ record.text }}</p>
+            </div>
+{#            <div class="row">#}
+{#                <a href="{% url 'update_task' task.pk  %}">edit...</a>#}
+{#                <a href="{% url 'detailed_task' task.pk %}">more...</a>#}
+{#                <a href="{% url 'delete_task' task.pk %}">delete...</a>#}
+{#            </div>#}
+            <hr>
+        </div>
+    {% endfor %}
+{% endblock %}
