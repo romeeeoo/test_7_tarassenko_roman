@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
+from guest_book_app import DEFAULT_STATUS
 from guest_book_app.forms import RecordForm
-from guest_book_app.models import GuestBookRecord, RecordStatus
+from guest_book_app.models import GuestBookRecord
 
 
 # Create your views here.
 def index_view(request):
-    records = GuestBookRecord.objects.all().order_by("created_at").filter(status=1)
+    records = GuestBookRecord.objects.all().order_by("created_at").filter(status=DEFAULT_STATUS)
     return render(request, "index.html", context={"records": records})
 
 
@@ -20,8 +21,7 @@ def add_view(request):
             new_record = GuestBookRecord(
                 author=form.cleaned_data["author"],
                 email=form.cleaned_data["email"],
-                text=form.cleaned_data["text"],
-                status=RecordStatus(1))
+                text=form.cleaned_data["text"])
             new_record.save()
             return redirect("index")
         else:
@@ -52,7 +52,3 @@ def confirm_delete_view(request, pk):
     record = get_object_or_404(GuestBookRecord, pk=pk)
     record.delete()
     return redirect("index")
-
-
-
-
