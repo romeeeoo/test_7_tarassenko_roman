@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %} New Record {% endblock %}
+
+{% block content %}
+<h1>Create New Record</h1>
+    <form action="{% url "add_record" %}" method="POST">
+       {%  include 'partial/record_form.html' with button_text="ADD" %}
+    </form>
+{% endblock %}
