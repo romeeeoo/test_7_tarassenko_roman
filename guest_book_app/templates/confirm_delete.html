@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %} Delete Record {% endblock %}
+
+{% block content %}
+    <div>
+        <h1>Delete this record? This action can't be undone. </h1>
+    </div>
+
+    <div class="row">
+        <h2>{{ record.author }}</h2>
+    </div>
+    <div class="row">
+        <p>{{ record.email }}</p>
+    </div>
+    <div class="row">
+        <p>{{ record.text }}</p>
+    </div>
+
+    <div class="row">
+        <form action="{% url 'confirm_delete_record' record.pk %} " method="POST">
+            {% csrf_token %}
+            <input class="btn btn-primary" type="submit" value="YES">
+            <a class="btn btn-primary" href="{% url 'index' %}">NO</a>
+        </form>
+    </div>
+{% endblock %}
